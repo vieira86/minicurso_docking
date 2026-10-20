@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minicurso — Docking & Química Computacional | Prof. Dr. Rafael Vieira</title>
+<meta name="description" content="Minicurso de Docking Molecular e Química Computacional: apresentação interativa, Missão Molecular com ArboMol e Dynamic Dock, questionário de percepção e análise de dados.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<header>
+  <a class="logo" href="#apresentacao">Rafael<span>Vieira</span><small>Minicurso · Química Computacional</small></a>
+  <nav>
+    <a href="#apresentacao" data-view="apresentacao">🎬 Apresentação</a>
+    <a href="#missao" data-view="missao">🧬 Missão Molecular</a>
+    <a href="#questionario" data-view="questionario">📝 Questionário</a>
+    <a href="#analise" data-view="analise" class="nav-data">📊 Análise de Dados</a>
+  </nav>
+</header>
+
+<!-- =========================================================
+     APRESENTAÇÃO
+     ========================================================= -->
+<main id="view-apresentacao" class="view">
+  <div class="deck-wrap">
+    <div class="deck" id="deck" tabindex="0" aria-label="Apresentação — clique para avançar">
+
+      <!-- 1 · CAPA -->
+      <section class="slide" data-title="Capa">
+        <div class="cols">
+          <div>
+            <div class="kicker">Minicurso · IFRO · 2026</div>
+            <h1>Docking Molecular &amp; <span class="grad">Química Computacional</span></h1>
+            <p class="lead">O que mudou de 2020 a 2026 e como você pode usar isso hoje, a partir de uma única molécula.</p>
+            <p style="margin-top:1.6em; font-size:1em;" class="muted">Prof. Dr. Rafael Vieira · Instituto Federal de Rondônia</p>
+          </div>
+          <div class="hide-mobile">
+            <svg viewBox="0 0 400 400" class="dock-svg float" aria-hidden="true">
+              <defs>
+                <linearGradient id="gA" x1="0" x2="1"><stop offset="0" stop-color="#4f8cff"/><stop offset="1" stop-color="#22d3c7"/></linearGradient>
+                <radialGradient id="gB"><stop offset="0" stop-color="#7c5cff" stop-opacity=".55"/><stop offset="1" stop-color="#7c5cff" stop-opacity="0"/></radialGradient>
+              </defs>
+              <circle cx="200" cy="200" r="190" fill="url(#gB)"/>
+              <g class="orbit">
+                <ellipse cx="200" cy="200" rx="170" ry="60" fill="none" stroke="#4f8cff" stroke-opacity=".35" stroke-width="1.5"/>
+                <ellipse cx="200" cy="200" rx="170" ry="60" fill="none" stroke="#22d3c7" stroke-opacity=".3" stroke-width="1.5" transform="rotate(60 200 200)"/>
+                <ellipse cx="200" cy="200" rx="170" ry="60" fill="none" stroke="#7c5cff" stroke-opacity=".35" stroke-width="1.5" transform="rotate(120 200 200)"/>
+                <circle cx="370" cy="200" r="7" fill="#22d3c7"/>
+                <circle cx="115" cy="53" r="6" fill="#4f8cff"/>
+                <circle cx="115" cy="347" r="6" fill="#b7a8ff"/>
+              </g>
+              <!-- hexágono aromático -->
+              <g stroke="url(#gA)" stroke-width="6" fill="none" stroke-linejoin="round">
+                <polygon points="200,130 260,165 260,235 200,270 140,235 140,165"/>
+                <circle cx="200" cy="200" r="38" stroke-width="4" stroke-opacity=".7"/>
+                <line x1="260" y1="165" x2="310" y2="135"/>
+                <line x1="140" y1="235" x2="90" y2="265"/>
+              </g>
+              <circle cx="318" cy="130" r="13" fill="#ff8a8a"/>
+              <circle cx="82" cy="270" r="13" fill="#7fb0ff"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2 · PERGUNTA -->
+      <section class="slide" data-title="Por quê?">
+        <div class="kicker">Para começar</div>
+        <h2>Quanto custa descobrir <span class="grad">um novo medicamento?</span></h2>
+        <div class="cols-3" style="margin-top:1.2em">
+          <div class="tile frag zoom"><div class="big-num hl">10–15</div><p>anos, em média, do laboratório até a farmácia</p></div>
+          <div class="tile frag zoom"><div class="big-num hl2">US$ bi</div><p>bilhões de dólares por fármaco aprovado, somando os fracassos</p></div>
+          <div class="tile frag zoom"><div class="big-num hl3">~90%</div><p>dos candidatos que entram em ensaios clínicos não chegam à aprovação</p></div>
+        </div>
+        <p class="frag" style="margin-top:1.6em; font-size:1.35em;">E se pudéssemos <b class="hl">testar milhões de moléculas no computador</b> antes de ir para a bancada?</p>
+      </section>
+
+      <!-- 3 · O QUE É QUÍMICA COMPUTACIONAL -->
+      <section class="slide" data-title="Química computacional">
+        <div class="kicker">O campo</div>
+        <h2>Química computacional: <span class="grad">o laboratório dentro do computador</span></h2>
+        <div class="cols-4" style="margin-top:.6em">
+          <div class="tile frag"><div class="ico">⚛️</div><h4>Química quântica</h4><p>DFT e métodos <i>ab initio</i>: elétrons, energias, espectros e mecanismos de reação.</p></div>
+          <div class="tile frag"><div class="ico">🌊</div><h4>Dinâmica molecular</h4><p>Simula o movimento dos átomos no tempo: estabilidade de complexos, solvatação.</p></div>
+          <div class="tile frag"><div class="ico">🔑</div><h4>Docking molecular</h4><p>Prevê <b>como</b> e <b>quão forte</b> uma molécula se encaixa em uma proteína-alvo.</p></div>
+          <div class="tile frag"><div class="ico">🤖</div><h4>Quimioinformática &amp; IA</h4><p>Aprendizado de máquina sobre milhares de moléculas: QSAR, classificação, triagem.</p></div>
+        </div>
+        <p class="frag muted" style="margin-top:1.4em">Hoje esses métodos não competem entre si: eles <b>se combinam</b> em um mesmo fluxo de trabalho.</p>
+      </section>
+
+      <!-- 4 · DOCKING: CHAVE-FECHADURA -->
+      <section class="slide" data-title="O que é docking">
+        <div class="cols">
+          <div>
+            <div class="kicker">Docking molecular</div>
+            <h2>A molécula é a chave. <span class="grad">A proteína é a fechadura.</span></h2>
+            <ul>
+              <li class="frag">O <b>ligante</b> (pequena molécula) procura um encaixe no <b>sítio ativo</b> da proteína.</li>
+              <li class="frag">Hoje sabemos que a fechadura também se mexe: <b class="hl">encaixe induzido</b> (Koshland).</li>
+              <li class="frag">O docking responde a duas perguntas: <b class="hl">qual a pose?</b> e <b class="hl2">qual a afinidade?</b></li>
+            </ul>
+          </div>
+          <div>
+            <svg viewBox="0 0 420 340" class="dock-svg" aria-label="Animação de um ligante entrando no sítio ativo">
+              <defs>
+                <linearGradient id="prot" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a3a68"/><stop offset="1" stop-color="#1a1f3a"/></linearGradient>
+              </defs>
+              <!-- proteína com cavidade -->
+              <path d="M20,320 L20,120 Q20,40 110,40 L150,40 Q170,40 170,70 L170,150 Q170,175 195,175 L235,175 Q260,175 260,150 L260,70 Q260,40 290,40 L320,40 Q400,40 400,130 L400,320 Z" fill="url(#prot)" stroke="#4f8cff" stroke-opacity=".5" stroke-width="2"/>
+              <circle class="pulse" cx="182" cy="110" r="7" fill="#ff8a8a"/>
+              <circle class="pulse" cx="248" cy="135" r="7" fill="#7fb0ff"/>
+              <circle class="pulse" cx="215" cy="165" r="7" fill="#c6f35b"/>
+              <text x="210" y="270" text-anchor="middle" fill="#9aa4b8" font-size="15" font-family="Segoe UI, sans-serif">Proteína-alvo · sítio ativo</text>
+              <!-- ligante (se move ao clicar) -->
+              <g class="frag keep lig-move">
+                <g stroke="#22d3c7" stroke-width="4" fill="rgba(34,211,199,.12)" stroke-linejoin="round">
+                  <polygon points="215,72 245,89 245,123 215,140 185,123 185,89"/>
+                </g>
+                <circle cx="185" cy="89" r="7" fill="#ff8a8a"/>
+                <circle cx="245" cy="123" r="7" fill="#7fb0ff"/>
+              </g>
+              <!-- interações -->
+              <g class="frag" stroke="#ffcf8a" stroke-width="2.5" stroke-dasharray="5 5">
+                <line x1="185" y1="89" x2="182" y2="110"/>
+                <line x1="245" y1="123" x2="248" y2="135"/>
+              </g>
+              <g class="frag"><text x="210" y="225" text-anchor="middle" fill="#ffcf8a" font-size="16" font-family="Segoe UI, sans-serif" font-weight="700">ΔG ≈ −8,4 kcal/mol</text></g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 · BUSCA + PONTUAÇÃO -->
+      <section class="slide" data-title="Busca e pontuação">
+        <div class="kicker">Por dentro do algoritmo</div>
+        <h2>Todo docking tem <span class="grad">duas engrenagens</span></h2>
+        <div class="cols" style="align-items:stretch; margin-top:.4em">
+          <div class="tile frag left">
+            <div class="ico">🔍</div>
+            <h4>1 · Algoritmo de busca</h4>
+            <p>Explora posições, orientações e conformações do ligante dentro da caixa (<i>grid box</i>). No AutoDock Vina: busca estocástica + otimização local.</p>
+            <p style="margin-top:.6em" class="mono hl">→ gera milhares de <b>poses</b></p>
+          </div>
+          <div class="tile frag">
+            <div class="ico">⚖️</div>
+            <h4>2 · Função de pontuação</h4>
+            <p>Estima a energia de ligação de cada pose: ligações de hidrogênio, contatos hidrofóbicos, repulsões, perda de torção.</p>
+            <p style="margin-top:.6em" class="mono hl2">→ ranqueia por <b>score (kcal/mol)</b></p>
+          </div>
+        </div>
+        <p class="frag" style="margin-top:1.3em">Uma boa busca com uma pontuação ruim acha a resposta errada com muita confiança. <b>As duas precisam funcionar.</b></p>
+      </section>
+
+      <!-- 6 · PIPELINE -->
+      <section class="slide" data-title="Fluxo de trabalho">
+        <div class="kicker">Passo a passo</div>
+        <h2>O fluxo de um <span class="grad">docking bem feito</span></h2>
+        <div class="pipe">
+          <div class="step frag"><div class="n">01</div><div class="ico">🧱</div><h4>Alvo</h4><p>Estrutura do PDB ou prevista (AlphaFold)</p></div>
+          <div class="step frag"><div class="n">02</div><div class="ico">🧹</div><h4>Preparar proteína</h4><p>Remover águas, adicionar H, cargas</p></div>
+          <div class="step frag"><div class="n">03</div><div class="ico">💊</div><h4>Ligante</h4><p>SMILES → 3D, protonação, minimização</p></div>
+          <div class="step frag"><div class="n">04</div><div class="ico">📦</div><h4>Sítio</h4><p>Definir a caixa sobre o sítio ativo</p></div>
+          <div class="step frag"><div class="n">05</div><div class="ico">⚙️</div><h4>Docking</h4><p>Vina, GNINA, Dynamic Dock…</p></div>
+          <div class="step frag"><div class="n">06</div><div class="ico">🔬</div><h4>Análise</h4><p>Poses, interações, validação</p></div>
+        </div>
+        <p class="frag muted" style="margin-top:1.3em">💡 O <b>Dynamic Dock</b>, desenvolvido no IFRO, automatiza as etapas 02 a 05, incluindo a detecção do sítio ativo.</p>
+      </section>
+
+      <!-- 7 · LENDO O RESULTADO -->
+      <section class="slide" data-title="Interpretando o score">
+        <div class="cols">
+          <div>
+            <div class="kicker">Interpretação</div>
+            <h2>Como ler o <span class="grad">resultado</span></h2>
+            <ul>
+              <li class="frag">Score <b>mais negativo</b> = maior afinidade <b>prevista</b>.</li>
+              <li class="frag">Valide o protocolo com <b class="hl">redocking</b>: a pose recriada deve ficar a <b>RMSD ≤ 2 Å</b> do ligante cristalográfico.</li>
+              <li class="frag">Compare sempre com um <b class="hl2">controle</b> (um fármaco ou ligante conhecido do mesmo alvo).</li>
+              <li class="frag"><b class="hl3">Score não é atividade!</b> É uma hipótese que precisa de confirmação experimental.</li>
+            </ul>
+          </div>
+          <div class="tile">
+            <p class="small muted" style="margin-bottom:.6em">Referência aproximada (Vina, kcal/mol)</p>
+            <div class="frag"><div class="scale-row"><span>Fraca</span><div class="scale-bar" style="--w:35%"></div><span class="v">−4 a −6</span></div></div>
+            <div class="frag"><div class="scale-row"><span>Moderada</span><div class="scale-bar" style="--w:65%"></div><span class="v">−6 a −8</span></div></div>
+            <div class="frag"><div class="scale-row"><span>Forte</span><div class="scale-bar" style="--w:95%"></div><span class="v">≤ −8</span></div></div>
+            <p class="small muted" style="margin-top:.8em">Os limites dependem do alvo e do tamanho da molécula. Moléculas grandes tendem a ganhar scores melhores só por terem mais contatos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 · LINHA DO TEMPO CLÁSSICA -->
+      <section class="slide" data-title="Linha do tempo I">
+        <div class="kicker">Linha do tempo · parte 1</div>
+        <h2>Quarenta anos de <span class="grad">docking clássico</span></h2>
+        <div class="timeline">
+          <div class="tl-item frag"><div class="tl-year">1982</div><h4>DOCK</h4><p>Kuntz e colaboradores: o primeiro programa de docking, baseado em formas complementares.</p></div>
+          <div class="tl-item frag"><div class="tl-year">1990</div><h4>AutoDock</h4><p>Goodsell &amp; Olson: grades de energia e busca automatizada.</p></div>
+          <div class="tl-item frag"><div class="tl-year">2010</div><h4>AutoDock Vina</h4><p>Trott &amp; Olson: muito mais rápido e preciso. Vira padrão mundial.</p></div>
+          <div class="tl-item frag"><div class="tl-year">2017</div><h4>Redes neurais</h4><p>CNNs começam a pontuar poses (base do GNINA).</p></div>
+          <div class="tl-item frag"><div class="tl-year">2019</div><h4>Docking ultragrande</h4><p>Lyu et al. (<i>Nature</i>): 170 milhões de moléculas triadas contra um alvo.</p></div>
+          <div class="tl-item frag"><div class="tl-year">2021</div><h4>Vina 1.2</h4><p>Novos campos de força, múltiplos ligantes e interface em Python.</p></div>
+        </div>
+
+        <!-- Destaque pessoal. Para trocar o ano, edite o texto dentro de .me-tag -->
+        <div class="me-card frag left">
+          <div class="me-photo">
+            <img src="https://github.com/vieira86.png" alt="Prof. Dr. Rafael Vieira"
+                 referrerpolicy="no-referrer"
+                 onerror="this.style.display='none'; this.parentNode.insertAdjacentHTML('beforeend', '&lt;div style=&quot;position:relative;width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card);border:0.22em solid var(--bg-alt);font-weight:800;font-size:1.6em&quot;&gt;RV&lt;/div&gt;');">
+          </div>
+          <div class="me-text">
+            <span class="me-tag">2019 · foi aqui que a minha história começou</span>
+            <h4>Onde entrei nessa história</h4>
+            <p>Foi nesse período que comecei a minha pesquisa em <b class="hl">química computacional</b>, cursando
+              <b>Química Medicinal</b>, <b>Química Orgânica Medicinal</b> e <b>Quimioinformática</b>
+              na <span class="me-unis">UNESP, UNICAMP e USP</span>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9 · LINHA DO TEMPO IA -->
+      <section class="slide" data-title="Linha do tempo II">
+        <div class="kicker">Linha do tempo · parte 2 · a virada da IA</div>
+        <h2>2020–2026: <span class="grad">a revolução da inteligência artificial</span></h2>
+        <div class="timeline">
+          <div class="tl-item frag"><div class="tl-year">2020</div><h4>AlphaFold 2</h4><p>Vence o CASP14 e prevê estruturas de proteínas com precisão próxima da experimental.</p></div>
+          <div class="tl-item frag"><div class="tl-year">2022</div><h4>AlphaFold DB &amp; DiffDock</h4><p>Mais de 200 milhões de estruturas abertas. O docking passa a usar modelos generativos (difusão).</p></div>
+          <div class="tl-item frag"><div class="tl-year">2024</div><h4>AlphaFold 3 &amp; RoseTTAFold AA</h4><p><i>Co-folding</i>: proteína e ligante previstos juntos.</p></div>
+          <div class="tl-item frag"><div class="tl-year">2024</div><h4>PoseBusters</h4><p>Teste de realidade: muitas poses de IA eram fisicamente impossíveis.</p></div>
+          <div class="tl-item frag"><div class="tl-year">2024</div><h4>Nobel de Química</h4><p>Baker (design de proteínas), Hassabis &amp; Jumper (AlphaFold).</p></div>
+          <div class="tl-item frag"><div class="tl-year">2025+</div><h4>Modelos abertos</h4><p>Chai-1, Boltz-1 e Boltz-2: co-folding aberto e previsão de afinidade.</p></div>
+        </div>
+
+        <!-- Destaque pessoal · 2024 -->
+        <div class="me-card me-warm frag left">
+          <div class="me-duo">
+            <figure>
+              <div class="me-photo">
+                <img src="https://github.com/vieira86.png" alt="Prof. Dr. Rafael Vieira" referrerpolicy="no-referrer">
+              </div>
+              <figcaption>Prof. Rafael</figcaption>
+            </figure>
+            <figure>
+              <div class="me-photo">
+                <img src="vitor.png" alt="Vitor Hugo Batista">
+              </div>
+              <figcaption>Vitor Hugo</figcaption>
+            </figure>
+          </div>
+          <div class="me-text">
+            <span class="me-tag">2024 · e a história continuou aqui no IFRO</span>
+            <h4>Orientação, plataforma e registro</h4>
+            <p>Em 2024 orientei o estudante <b>Vitor Hugo Batista</b> no projeto <b class="hl3">C2TROPICS</b> — exploração racional
+              de produtos naturais contra a dengue —, que virou <b>capítulo de livro</b>. Dali vieram publicações sobre
+              docagem molecular, como o <b class="hl3">PREDACTORS</b>, e o <b>registro de software no INPI</b>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9b · ADENDO: PRODUÇÃO DO PROJETO (fala do Vitor) -->
+      <section class="slide dense" data-title="Adendo · produção">
+        <div class="kicker">Adendo · a palavra é do Vitor Hugo Batista</div>
+        <h2>O que saiu das <span class="grad">PESQUISAS DO IFRO?</span></h2>
+        <p class="muted" style="margin-bottom:.4em">Quatro resultados concretos de um projeto que começou com um estudante de graduação. Clique em cada um para abrir.</p>
+        <div class="docs">
+          <a class="doc frag" href="capitulo.png" target="_blank" rel="noopener">
+            <div class="doc-img"><img src="capitulo.png" alt="Capítulo de livro sobre a plataforma C2TROPICS"></div>
+            <span class="tag tag-p">Capítulo de livro</span>
+            <h4>Exploração racional de produtos naturais contra dengue: a plataforma C2TROPICS</h4>
+            <p>Vieira, Sousa, <b>Batista</b>, Sussai &amp; Camargo Junior</p>
+          </a>
+          <a class="doc frag" href="paper.png" target="_blank" rel="noopener">
+            <div class="doc-img"><img src="paper.png" alt="Artigo publicado na revista Next Research"></div>
+            <span class="tag tag-b">Artigo · Next Research (Elsevier)</span>
+            <h4>Exploring the molecular potential of natural products against COVID-19 through molecular modeling and machine learning</h4>
+            <p>Rafael Vieira, <b>Vitor Hugo Batista</b> &amp; Kally Alves de Sousa</p>
+          </a>
+          <a class="doc frag" href="registro.png" target="_blank" rel="noopener">
+            <div class="doc-img"><img src="registro.png" alt="Certificado de registro de programa de computador no INPI"></div>
+            <span class="tag tag-w">Registro no INPI</span>
+            <h4>PREDACTORS — Predicting Activity in Organic Samples</h4>
+            <p>Processo BR512026006803-7 · titular: IFRO · autores: Vieira, Sousa &amp; <b>Batista</b></p>
+          </a>
+          <a class="doc frag" href="certificado2.png" target="_blank" rel="noopener">
+            <div class="doc-img"><img src="certificado2.png" alt="Certificado de registro do Dynamic Dock no INPI"></div>
+            <span class="tag tag-t">Registro no INPI</span>
+            <h4>DYNAMIC DOCK — A Platform for Automated Molecular Docking with Active Site Detection</h4>
+            <p>Processo BR512026006804-5 · titular: IFRO · autores: Vieira, Sousa &amp; <b>Batista</b></p>
+          </a>
+        </div>
+        <p class="frag" style="margin-top:1.1em; font-size:1.1em">🎤 <b>Vitor</b>, conta pra gente: como foi sair da sala de aula e chegar
+          a um <b class="hl">capítulo de livro</b>, um <b class="hl2">artigo internacional</b> e <b class="hl3">dois softwares registrados</b> no INPI?</p>
+      </section>
+
+      <!-- 10 · NOBEL -->
+      <section class="slide" data-title="Nobel 2024">
+        <div class="cols">
+          <div>
+            <div class="kicker">Prêmio Nobel de Química · 2024</div>
+            <h2>Quando a computação <span class="grad">ganhou o Nobel de Química</span></h2>
+            <ul>
+              <li class="frag"><b>David Baker</b>: design computacional de proteínas que não existem na natureza.</li>
+              <li class="frag"><b>Demis Hassabis &amp; John Jumper</b>: AlphaFold, que prevê a estrutura 3D a partir da sequência de aminoácidos.</li>
+              <li class="frag">Para o docking, isso significa que <b class="hl">quase todo alvo agora tem uma estrutura</b> para trabalhar, mesmo sem cristal.</li>
+            </ul>
+          </div>
+          <div class="tile frag zoom" style="text-align:center; padding:2em 1em">
+            <div class="big-num grad">200 mi+</div>
+            <p style="margin-top:.5em">estruturas de proteínas previstas e disponíveis gratuitamente no AlphaFold DB</p>
+            <p class="small muted" style="margin-top:1em">Antes, o PDB reunia cerca de 200 mil estruturas experimentais, acumuladas ao longo de 50 anos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 · CO-FOLDING -->
+      <section class="slide" data-title="Co-folding">
+        <div class="kicker">O que mudou no docking</div>
+        <h2>Da proteína rígida ao <span class="grad">co-folding</span></h2>
+        <div class="cols" style="align-items:stretch">
+          <div class="tile frag left">
+            <span class="tag tag-b">Docking clássico</span>
+            <h4 style="margin-top:.6em">Proteína (quase) fixa + ligante flexível</h4>
+            <p>Precisa de uma estrutura 3D do alvo. É rápido, interpretável e baseado em física.</p>
+            <p class="mono small hl" style="margin-top:.6em">Vina · GNINA · Dynamic Dock</p>
+          </div>
+          <div class="tile frag">
+            <span class="tag tag-p">IA generativa · co-folding</span>
+            <h4 style="margin-top:.6em">Sequência + SMILES → complexo inteiro</h4>
+            <p>O modelo prevê a proteína e o ligante <b>juntos</b>, inclusive a mudança de forma do sítio.</p>
+            <p class="mono small hl2" style="margin-top:.6em">AlphaFold 3 · RoseTTAFold AA · Boltz · Chai</p>
+          </div>
+        </div>
+        <p class="frag" style="margin-top:1.2em">Tendência de 2025–2026: <b class="hl">fluxos híbridos</b>. A IA gera hipóteses e a física (docking, dinâmica, energia livre) confere.</p>
+      </section>
+
+      <!-- 12 · CUIDADO -->
+      <section class="slide" data-title="Limitações">
+        <div class="kicker">Senso crítico</div>
+        <h2>⚠️ <span class="grad">Cuidado</span> com o entusiasmo</h2>
+        <div class="cols-3">
+          <div class="tile frag"><div class="ico">🧩</div><h4>Poses impossíveis</h4><p>O PoseBusters (2024) mostrou choques entre átomos e geometrias irreais em métodos de IA que pareciam ótimos pelo RMSD.</p></div>
+          <div class="tile frag"><div class="ico">🧭</div><h4>Generalização</h4><p>Modelos de IA acertam mais em alvos parecidos com os do treino e caem em sítios realmente novos.</p></div>
+          <div class="tile frag"><div class="ico">🧪</div><h4>Score ≠ fármaco</h4><p>Afinidade é só o começo: toxicidade, absorção, metabolismo e síntese decidem o resto.</p></div>
+        </div>
+        <p class="frag" style="margin-top:1.3em; font-size:1.25em">Regra de ouro: <b class="hl">todo resultado computacional é uma hipótese</b>, não uma conclusão.</p>
+      </section>
+
+      <!-- 13 · ESCALA -->
+      <section class="slide" data-title="Escala">
+        <div class="cols">
+          <div>
+            <div class="kicker">Triagem virtual</div>
+            <h2>A escala mudou de <span class="grad">milhares para bilhões</span></h2>
+            <p class="frag">Bibliotecas <b>"sob demanda"</b> (como a Enamine REAL) oferecem dezenas de bilhões de moléculas que podem ser sintetizadas quando pedidas.</p>
+            <p class="frag" style="margin-top:.8em">Para tornar isso viável, o <b class="hl">aprendizado de máquina</b> pré-seleciona os candidatos e só uma fração passa pelo docking completo.</p>
+          </div>
+          <div class="tile">
+            <p class="small muted" style="margin-bottom:.6em">Quantas moléculas cada estratégia avalia (escala log)</p>
+            <div class="frag"><div class="scale-row"><span>Bancada (HTS)</span><div class="scale-bar" style="--w:55%"></div><span class="v">~10⁶</span></div></div>
+            <div class="frag"><div class="scale-row"><span>Docking 2019</span><div class="scale-bar" style="--w:75%"></div><span class="v">~10⁸</span></div></div>
+            <div class="frag"><div class="scale-row"><span>Docking + IA</span><div class="scale-bar" style="--w:88%"></div><span class="v">~10⁹</span></div></div>
+            <div class="frag"><div class="scale-row"><span>Sob demanda</span><div class="scale-bar" style="--w:100%"></div><span class="v">&gt;10¹⁰</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 14 · ALÉM DO DOCKING -->
+      <section class="slide" data-title="Além do docking">
+        <div class="kicker">Depois do docking</div>
+        <h2>O docking é a porta de entrada, <span class="grad">não o fim</span></h2>
+        <div class="cols-4">
+          <div class="tile frag"><div class="ico">🌊</div><h4>Dinâmica molecular</h4><p>O complexo se mantém estável por nanossegundos em água?</p></div>
+          <div class="tile frag"><div class="ico">🔋</div><h4>MM/GBSA &amp; FEP</h4><p>Energias livres mais rigorosas e mais caras, para os melhores candidatos.</p></div>
+          <div class="tile frag"><div class="ico">💊</div><h4>ADMET <i>in silico</i></h4><p>Absorção, distribuição, metabolismo, excreção e toxicidade.</p></div>
+          <div class="tile frag"><div class="ico">📈</div><h4>QSAR &amp; ML</h4><p>Modelos que aprendem a relação estrutura → atividade.</p></div>
+        </div>
+      </section>
+
+      <!-- 15 · AMAZÔNIA / IFRO -->
+      <section class="slide" data-title="Ferramentas do IFRO">
+        <div class="kicker">Ciência feita aqui</div>
+        <h2>Química computacional contra <span class="grad">as arboviroses</span></h2>
+        <p class="frag muted" style="margin-bottom:1em">Dengue, zika e chikungunya são problemas de saúde pública em Rondônia. Três plataformas desenvolvidas no IFRO atacam o problema:</p>
+        <div class="cols-3">
+          <div class="tile frag"><span class="tag tag-t">Classificação</span><h4 style="margin-top:.5em">🦟 ArboMol</h4><p>Recebe um SMILES e indica se a molécula se parece com compostos em desenvolvimento contra arbovírus e com qual vírus (dengue, zika ou chikungunya).</p></div>
+          <div class="tile frag"><span class="tag tag-b">Docking</span><h4 style="margin-top:.5em">🎯 Dynamic Dock</h4><p>Docking proteína–ligante automatizado com detecção do sítio ativo, baseado no AutoDock Vina (<i>In Silico Research in Biomedicine</i>, 2026).</p></div>
+          <div class="tile frag"><span class="tag tag-w">Predição</span><h4 style="margin-top:.5em">🔮 PREDACTORS</h4><p>Prediz a atividade biológica a partir do SMILES, com aprendizado de máquina treinado em dados de docking.</p></div>
+        </div>
+      </section>
+
+      <!-- 16 · SMILES -->
+      <section class="slide" data-title="SMILES">
+        <div class="cols">
+          <div>
+            <div class="kicker">A linguagem das moléculas</div>
+            <h2>SMILES: a molécula <span class="grad">em uma linha de texto</span></h2>
+            <ul>
+              <li class="frag">Letras = átomos (C, N, O, Cl…). Hidrogênios ficam implícitos.</li>
+              <li class="frag"><span class="mono hl">=</span> ligação dupla · <span class="mono hl">#</span> ligação tripla · <span class="mono hl">( )</span> ramificação</li>
+              <li class="frag">Números abrem e fecham <b>anéis</b>; letras minúsculas indicam átomos <b>aromáticos</b>.</li>
+            </ul>
+          </div>
+          <div style="display:grid; gap:.8em">
+            <div class="frag"><span class="muted small">Etanol</span><br><span class="code-line">CCO</span></div>
+            <div class="frag"><span class="muted small">Benzeno</span><br><span class="code-line">c1ccccc1</span></div>
+            <div class="frag"><span class="muted small">Ácido acetilsalicílico (AAS)</span><br><span class="code-line">CC(=O)Oc1ccccc1C(=O)O</span></div>
+            <div class="frag"><span class="muted small">Cafeína</span><br><span class="code-line">Cn1c(=O)c2c(ncn2C)n(C)c1=O</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 17 · MISSÃO -->
+      <section class="slide" data-title="Sua missão">
+        <div class="kicker">Mão na massa</div>
+        <h2>🧬 Sua <span class="grad">Missão Molecular</span></h2>
+        <p class="frag muted">Cada um vai receber, por sorteio, uma molécula diferente e investigá-la como um químico computacional:</p>
+        <div class="pipe">
+          <div class="step frag"><div class="n">00</div><div class="ico">🎲</div><h4>Sorteio</h4><p>Sua molécula exclusiva</p></div>
+          <div class="step frag"><div class="n">01</div><div class="ico">✍️</div><h4>SMILES</h4><p>Traduza a estrutura</p></div>
+          <div class="step frag"><div class="n">02</div><div class="ico">⚖️</div><h4>Propriedades</h4><p>Massa molar e Lipinski</p></div>
+          <div class="step frag"><div class="n">03</div><div class="ico">🦟</div><h4>ArboMol</h4><p>Classificação</p></div>
+          <div class="step frag"><div class="n">04</div><div class="ico">🎯</div><h4>Dynamic Dock</h4><p>Docking nos 3 alvos</p></div>
+          <div class="step frag"><div class="n">05</div><div class="ico">🧠</div><h4>Conclusão</h4><p>Interprete como cientista</p></div>
+        </div>
+        <div class="frag" style="margin-top:1.4em"><a class="btn btn-primary" href="#missao" data-noadvance>Começar a Missão Molecular →</a></div>
+      </section>
+
+      <!-- 18 · ENCERRAMENTO -->
+      <section class="slide" data-title="Obrigado">
+        <div style="text-align:center">
+          <div class="kicker">Encerramento</div>
+          <h1>Obrigado! <span class="grad">Sua opinião importa.</span></h1>
+          <p class="lead" style="margin:1em auto 0">Responda ao questionário de percepção. Leva 2 minutos, é só clicar, e ajuda a melhorar os próximos minicursos.</p>
+          <div style="margin-top:1.6em; display:flex; gap:.8em; justify-content:center; flex-wrap:wrap">
+            <a class="btn btn-primary" href="#questionario" data-noadvance>📝 Responder ao questionário</a>
+            <a class="btn btn-ghost" href="#analise" data-noadvance>📊 Ver análise dos dados</a>
+          </div>
+          <p class="muted" style="margin-top:2em; font-size:.95em">Prof. Dr. Rafael Vieira · rafael.vieira@ifro.edu.br · rafaelvieira.org</p>
+        </div>
+      </section>
+
+      <div class="deck-progress" id="deck-progress"></div>
+      <div class="deck-hint" id="deck-hint">clique ou use → para avançar</div>
+    </div>
+
+    <div class="deck-bar">
+      <button class="btn btn-ghost btn-sm" id="btn-prev">← Voltar</button>
+      <button class="btn btn-primary btn-sm" id="btn-next">Avançar →</button>
+      <button class="btn btn-ghost btn-sm" id="btn-play">▶ Reproduzir</button>
+      <span class="deck-count" id="deck-count">1 / 19</span>
+      <span class="spacer"></span>
+      <button class="btn btn-ghost btn-sm" id="btn-restart">↺ Início</button>
+      <button class="btn btn-ghost btn-sm" id="btn-full">⛶ Tela cheia</button>
+    </div>
+  </div>
+</main>
+
+<!-- =========================================================
+     MISSÃO MOLECULAR
+     ========================================================= -->
+<main id="view-missao" class="view">
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Desafio</span>
+      <h2>🧬 Missão Molecular</h2>
+      <p>Uma molécula só sua. Um sorteio e cinco etapas: cada uma resolvida destrava a próxima.</p>
+    </div>
+    <div id="mission-body" class="mission"></div>
+  </section>
+</main>
+
+<!-- =========================================================
+     QUESTIONÁRIO
+     ========================================================= -->
+<main id="view-questionario" class="view">
+  <section class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Percepção</span>
+      <h2>📝 Como foi o minicurso para você?</h2>
+      <p>Clique na opção que melhor representa sua opinião. As respostas são anônimas.</p>
+    </div>
+    <div id="quiz-body" class="quiz"></div>
+  </section>
+</main>
+
+<!-- =========================================================
+     ANÁLISE DE DADOS
+     ========================================================= -->
+<main id="view-analise" class="view">
+  <section class="wrap" style="max-width:1180px">
+    <div class="section-head">
+      <span class="eyebrow">Resultados</span>
+      <h2>📊 Análise de Dados</h2>
+      <p>Gráficos e interpretações gerados automaticamente a partir das respostas gravadas na planilha.</p>
+      <div style="margin-top:18px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap">
+        <button class="btn btn-primary" id="btn-analisar">📊 Analisar dados agora</button>
+      </div>
+    </div>
+    <div id="analysis-body"></div>
+  </section>
+</main>
+
+<footer>
+  © 2026 Prof. Dr. Rafael Vieira · IFRO. Minicurso de Docking Molecular &amp; Química Computacional.
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="moleculas/moleculas.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/slides.js"></script>
+<script src="assets/js/missao.js"></script>
+<script src="assets/js/questionario.js"></script>
+<script src="assets/js/analise.js"></script>
+</body>
+</html>
