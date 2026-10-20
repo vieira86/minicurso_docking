@@ -1,0 +1,8 @@
+# Arquivos de trabalho do ChemDraw (não vão para o GitHub)
+moleculas_curso.cdx
+moleculas_curso2.cdx
+*.cdx
+*.cdxml
+
+# macOS
+.DS_Store
